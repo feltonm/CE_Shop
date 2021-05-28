@@ -1,0 +1,47 @@
+Front End
+The front end shows the user how much they've completed as a green progress bar. I chose to show primarily amount completed because that is typical for progress bar. The amount left shows by the uncolored box beside the green box. Further details are available on hover. While green is chosen because of it's positive feel, other colors could be chosen to coordinate with the website. A bar is chosen to give the user their progress at a quick glance. The word, “Progress”, the empty bar, and the green bar should be included in one element to help ensure that they appeared together regardless of the browser. This would also facilitate moving the progress bar if desired at a later time.
+
+The front end would be implemented in JavaScript with an id (or id-like) tag added to the progress bar to ease grabbing and changing it. The call to change the front end should be asynchronous and should occur after a user performs an action that could change the progress (such as submitting a question), when the page is hard refreshed, and at a set interval (such as 2 minutes) in case progress is made on a different browser or machine. Whenever the backend responded to the request, the front end would grab the progress element.
+
+Below is a sample of what the function calling the backend might look like:
+
+const getCourseProgress = async (data = {}) => {
+  const response = await fetch('backend/status', {
+    method: 'POST',
+    headers {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  const progress = await response.json() 
+  const courseName = progress[0][“coursename”]
+  const completed = progress[0][“completed”]
+  const remaining = progress[0][“remaining”]
+  const course = document.getElementByID(“courseName”).textContent
+  if (course.equals(courseName) {
+    let progressBar = document.getElementById(“progressBar”)
+    const newWidth = completed * width / 100.0
+    progressBar.style.width = newWidth
+    updateOnHover(progressBar, completed, remaining)
+  }
+}
+
+
+The call to the back end API would include all the information needed for the back end to retrieve the progress, without remembering anything. At a minimum, it would include a token or other item identifying the logged in user and the current course. Because this information should not be protected and might be lengthy, it should use a post request. 
+
+The back end, implemented in Java, would return a JSON string with three elements, the course name, the completed percentage, and the remaining percentage. Including the course name ensures that if two calls return out-of-order, the front end will only update if the course name is the name of the current course.
+
+Depending on how the database was structured the back end could retrieve an average of the Completed column for that course and the user, ie if every question has a Completed field with equals 1 for completed and 0 for incomplete, the percentage would just be the average * 100. If that was not available, a simple call for the number of questions marked as completed and for the total number of questions could be used to calculate the Completed percentage and the Remaining percentage. An example of how this might look is included below:
+
+public static int getCompleted(Connection con, String userID, String courseName) throws SQLException {
+    String query = "SELECT AVG(completed) AS Completed FROM course_questions
+	WHERE ”;
+    try (Statement stmt = con.createStatement()) {
+      ResultSet rs = stmt.executeQuery(query);
+      return rs.getFloat(“Completed”);      
+    } catch (SQLException e) {
+      JDBCTutorialUtilities.printSQLException(e);
+    }
+  }
+
+
