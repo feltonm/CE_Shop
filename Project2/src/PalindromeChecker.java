@@ -1,8 +1,12 @@
+import java.util.Scanner;
+
 public class PalindromeChecker {
     public static void main(String[] args) {
-        System.out.println(isPalindrome("false"));
-        System.out.println(isPalindrome("lol"));
-
+        System.out.println("Enter word to check if it's a Palindrome");
+        Scanner scanner = new Scanner(System.in);
+        String word = scanner.next();
+        System.out.println(word + " is " + (isPalindrome(word)? "":"not ") + "a palindrome.");
+        scanner.close();
     }
 
     /**
