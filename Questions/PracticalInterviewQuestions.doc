@@ -1,0 +1,18 @@
+How would you make an application testable, what do you do to ensure code quality?
+
+One thing you can do to make your code better and more testable is to follow SOLID design principles.  Single responsibility methods mean you have only one thing to test, while closing classes to change while leaving them open for extension means that once you write your tests for the class you won't have to change them. Likewise keeping code loosely coupled and cutting back on dependencies will make it easier to test, easier to read, and easier to understand.
+
+Another way to make an application testable would be to follow test driven development. While it may not guarantee you are testing all you should, if your focus is on testing when you write the code it is more likely to end up testable.
+
+For the front end, utilize some type of unique id for each element that you want to be sure is present. This will make it easier for programs like Selenium to check for their presence and value. 
+
+From a software development perspective, what steps might you take, on an ongoing basis, to continually improve your skillset? 
+
+Steps I can take to learn about areas where I can improve or expand my skillset, include regularly attending relevant meetups like the Seattle Java User's Group and taking advantage of LinkedIn Learning (formerly Lynda.com).  I can also listen to my coworkers and read job board postings for things they mention that I don't know about and need to research. 
+
+Improving any skillset involves practice. Practice can come in the form of maintaining a group of programming friends to work on projects with and working HackerRank problems in new or lower proficiency languages. As part of my job, code reviews and taking on larger challenges will also give me practice improving my coding as well as expanding my skillset.
+
+Provide an example of a time when you just couldn't complete all of your work on time to meet a deadline. What did you do? What was the result?
+
+For the first sprint, my capstone team had decided on an architecture, but we were not going to get all the pieces in place in time for the sprint review. I realized that if I created a facade for what we were building that we could get it to work now and refactor later. I got the team to agree and built it. It worked and actually made our lives easier, providing a convenient point of contact.
+
